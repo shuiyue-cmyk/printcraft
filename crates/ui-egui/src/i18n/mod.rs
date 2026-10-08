@@ -542,7 +542,7 @@ mod tests {
         let web_name = web.name();
         let mut web_only = crate::theme::font_definitions();
         for family in web_only.families.values_mut() {
-            family.retain(|name| !craft.iter().any(|face| face.name() == *name) || *name == web_name);
+            family.retain(|name| !pdfcraft_fonts::CRAFT_FONTS.iter().any(|face| face.name() == *name) || *name == web_name);
         }
         use egui::epaint::text::{Fonts, TextOptions};
         for (build, defs) in [("desktop", crate::theme::font_definitions()), ("web", web_only)] {
