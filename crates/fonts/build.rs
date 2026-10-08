@@ -38,12 +38,6 @@ fn craft_fonts(dir: &std::path::Path) -> Result<String, String> {
         let [family, style, file, scripts, ..] = f.as_slice() else {
             return Err(format!("malformed manifest line: {line}"));
         };
-        // AGENTS.md §1.1: Noto CJK (Source Han rebranded, Adobe-authored visual design) is
-        // never an allowed asset, even under OFL. Skip it if a craft-fonts checkout still
-        // lists it, so no PrintCraft output ever embeds it.
-        if *family == "Noto Sans CJK SC" {
-            continue;
-        }
         if wasm && !(*family == "BIZ UDPGothic" && *style == "Regular") {
             continue;
         }
